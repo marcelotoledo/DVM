@@ -11,6 +11,9 @@
       %strong= model_class.human_attribute_name(:company_id) + ':'
       = Company.find_by_id(@batch.company_id).name
     %p
+      %strong= model_class.human_attribute_name(:quantity) + ':'
+      = @batch.quantity
+    %p
       %strong= model_class.human_attribute_name(:created_at) + ':'
       = @batch.created_at
     %p
@@ -19,13 +22,16 @@
     %table.table.table-striped
       %thead
         %tr
+          %th= "Id"
           %th= "Voucher"
           %th= "Status"
       %tbody
         - vouchers = Voucher.find_all_by_batch_id(@batch.id)
+        - i = 0
         - vouchers.each do |v|
           %tr
+            %td= i += 1
             %td= v.voucher
-            %td= v.status_id
+            %td= Status.find_by_id(v.status_id).description
           
     = link_to t('.back', :default => t("helpers.links.back")), batches_path, :class => 'btn'

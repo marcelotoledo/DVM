@@ -1,4 +1,6 @@
 * Batches
-** Colocar o dado quantity no banco de dados
+* User Vouchers
 ** Download CSV
 ** Paginacao
+* CSV downloads everywhere
+* Corrigir permissões de acesso aos modulos (authentication)

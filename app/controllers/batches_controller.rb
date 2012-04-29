@@ -1,4 +1,6 @@
 class BatchesController < ApplicationController
+  require 'voucher'
+  
   # GET /batches
   # GET /batches.json
   def index
@@ -36,8 +38,10 @@ class BatchesController < ApplicationController
   # POST /batches.json
   def create
     @batch = Batch.new(params[:batch])
+    n = DVM::NewBase.new(defined?(Voucher.last.voucher) ? Voucher.last.voucher : nil)
     1.upto(params[:batch][:quantity].to_i) do |number|
-      @batch.vouchers_attributes = [ { :voucher => "#{number}", :status_id => 1 } ]
+      n.next
+      @batch.vouchers_attributes = [ { :voucher => n.value.dup, :status_id => 1 } ]
     end
 
     respond_to do |format|

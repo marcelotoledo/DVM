@@ -1,7 +1,7 @@
 Dvm::Application.routes.draw do
-  get "error/error"
+  get "voucher/index"
 
-  resources :vouchers
+  get "error/error"
 
   resources :batches
 
@@ -11,6 +11,11 @@ Dvm::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
+  
+  get "vouchers" => "voucher#index", :as => "vouchers"
+  post "vouchers/search" => "voucher#search"
+  match 'vouchers/consume/:voucher' => 'voucher#consume'
+  
   resources :users
   resources :sessions
 
