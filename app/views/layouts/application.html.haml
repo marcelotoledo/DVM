@@ -1,0 +1,32 @@
+!!! 5
+%html
+  %head
+    %title DVM
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+%body
+
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      = link_to 'DVM', '/', :class => 'brand'
+      .nav-collapse
+        %ul.nav
+          %li= link_to 'Users', users_path
+          %li= link_to 'Companies', companies_path
+          %li= link_to 'Batches', batches_path
+          %li= link_to 'Vouchers', vouchers_path
+          %li= link_to 'Use Vouchers', '/'
+          %li= link_to 'Reports', '/'
+        %ul.nav.pull-right
+          %li.dropdown
+            %a{:href => '#', :class => 'dropdown-toggle', "data-toggle" => 'dropdown' }
+              %i.icon-user
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to 'Settings', '/settings/account'
+              %li.divider
+              %li= link_to "Logout", '/log_out'
+
+= yield

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  voucher: MyString
+  id_status: 1
+
+two:
+  voucher: MyString
+  id_status: 1

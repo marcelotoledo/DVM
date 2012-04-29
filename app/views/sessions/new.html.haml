@@ -1,0 +1,20 @@
+.row
+  .span5.offset5
+    .login-form
+      %legend Login
+      - if flash.alert
+        .alert.alert-error= flash.alert
+      - if flash.notice
+        .alert.alert-info= flash.notice
+      = form_tag sessions_path, :class => 'form-horizontal' do
+        %fieldset
+          .control-group
+            = label_tag :email, nil, :class => 'control-label'
+            .controls
+              = text_field_tag :email, params[:email]
+          .control-group
+            = label_tag :password, nil, :class => 'control-label'
+            .controls
+              = password_field_tag :password, params[:password]
+          .form-actions
+            = submit_tag 'Log in', :class => 'btn btn-primary'

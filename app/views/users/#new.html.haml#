@@ -1,0 +1,7 @@
+= render "shared/header", :title => "New User"
+
+- model_class = @user.class
+
+.row
+  .offset1.span12
+    = render :partial => "form"

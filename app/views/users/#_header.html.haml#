@@ -1,0 +1,4 @@
+.row
+  .span12.offset1
+    .page-header
+      %h1= title

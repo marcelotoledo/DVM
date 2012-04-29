@@ -1,0 +1,22 @@
+= form_for @batch, :html => { :class => 'form-horizontal' } do |f|
+  - if @batch.errors.any?
+    .alert.alert-error
+      %h2 Form is invalid
+      %ul
+        - for message in @batch.errors.full_messages
+          %li= message
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :company_id, :class => 'control-label'
+    .controls
+      = collection_select(:batch, :company_id, Company.all, :id, :name, :prompt => true)
+  .control-group
+    = f.label :quantity, :class => 'control-label'
+    .controls
+      = f.number_field :quantity, :class => 'number_field span1'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), batches_path, :class => 'btn'
