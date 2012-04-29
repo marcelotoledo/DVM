@@ -32,11 +32,6 @@ class BatchesController < ApplicationController
     end
   end
 
-  # GET /batches/1/edit
-  def edit
-    @batch = Batch.find(params[:id])
-  end
-
   # POST /batches
   # POST /batches.json
   def create
@@ -51,22 +46,6 @@ class BatchesController < ApplicationController
         format.json { render json: @batch, status: :created, location: @batch }
       else
         format.html { render action: "new" }
-        format.json { render json: @batch.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /batches/1
-  # PUT /batches/1.json
-  def update
-    @batch = Batch.find(params[:id])
-
-    respond_to do |format|
-      if @batch.update_attributes(params[:batch])
-        format.html { redirect_to @batch, notice: 'Batch was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
     end
