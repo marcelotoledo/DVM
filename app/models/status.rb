@@ -1,3 +1,3 @@
 class Status < ActiveRecord::Base
-  belongs_to :voucher
+  has_many :vouchers
 end

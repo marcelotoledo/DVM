@@ -1,6 +1,6 @@
-* Batches
-* User Vouchers
-** Download CSV
-** Paginacao
-* CSV downloads everywhere
 * Corrigir permissões de acesso aos modulos (authentication)
+* Permissão: Os menus só devem ser apresentados a quem tiver permissão.
+* Pesquisa de voucher deve ser limitada para data de expiração.
+* CSV downloads everywhere
+* Paginacao
+* Melhorar performance das queries no voucher -> show

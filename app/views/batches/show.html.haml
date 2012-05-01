@@ -11,13 +11,22 @@
       %strong= model_class.human_attribute_name(:company_id) + ':'
       = Company.find_by_id(@batch.company_id).name
     %p
+      %strong= model_class.human_attribute_name(:voucher_type_id) + ':'
+      = VoucherType.find_by_id(@batch.voucher_type_id).description
+    %p
       %strong= model_class.human_attribute_name(:quantity) + ':'
       = @batch.quantity
+    %p
+      %strong= model_class.human_attribute_name(:value) + ':'
+      = @batch.value
+    %p
+      %strong= model_class.human_attribute_name(:expiration) + ':'
+      = @batch.expiration
     %p
       %strong= model_class.human_attribute_name(:created_at) + ':'
       = @batch.created_at
     %p
-      = link_to 'Download CSV', '#'
+      = link_to 'Download CSV', batches_path + '/download/' + @batch.id.to_s
 
     %table.table.table-striped
       %thead

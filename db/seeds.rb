@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Status.create([{ description: 'Generated' }, { description: 'Used' }])
+VoucherType.create([{ description: 'Free' }, { description: 'Paid' }, { description: 'Free + Paid' }])
+Gender.create([{ description: 'Male' }, { description: 'Female' }])

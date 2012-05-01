@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  salesclerk: MyString
+  gender_id: 1
+  age: 1
+  total: 9.99
+
+two:
+  salesclerk: MyString
+  gender_id: 1
+  age: 1
+  total: 9.99

@@ -4,28 +4,12 @@
   .row
     .offset1.span12
       = text_field_tag 'search_query', nil, :class => "search-query"
-      = submit_tag 'Search', :class => "btn"
-  
-  - if params[:search_query]
-    .row{ :style => "margin-top: 15px;" }
-      .offset1.span4
-        - if @voucher_found
-          .alert.alert-success
-            = "Found #{params[:search_query]}"
-          .row          
-            .span4      
-              = link_to 'Mark as used', vouchers_path+'/consume/'+params[:search_query], :confirm => 'Are you sure?', :class => 'btn btn-primary'
-              = link_to 'Cancel', vouchers_path, :class => 'btn'
-        - else          
-          .alert.alert-error
-            = "Not Found #{params[:search_query]}"
-
-  .row
+      = submit_tag 'Search', :class => "btn"  
+  .row{ :style => "margin-top: 15px;" }
     .offset1.span4
-      - if @consumed
-        .alert.alert-success
-          = "Voucher #{params[:voucher]} marked as used."
-      - else 
+      - if flash.alert
         .alert.alert-error
-          = "Error could not mark voucher #{params[:voucher]} as used"
-          
+          = flash.alert
+      - if flash.notice
+        .alert.alert-info
+          = flash.notice

@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_filter :logged_in?
+  #before_filter :logged_in?
   
   # GET /companies
   # GET /companies.json

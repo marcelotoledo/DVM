@@ -1,4 +1,5 @@
 class Voucher < ActiveRecord::Base
-  has_many :statuses
-  belongs_to :batch 
+  has_one :voucher_report
+  belongs_to :batch
+  belongs_to :status  
 end

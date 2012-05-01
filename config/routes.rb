@@ -3,6 +3,8 @@ Dvm::Application.routes.draw do
 
   get "error/error"
 
+  match 'batches/download/:id' => 'batches#download'  
+  get "batches/reports" => "batches#reports"
   resources :batches
 
   resources :companies
@@ -14,6 +16,9 @@ Dvm::Application.routes.draw do
   
   get "vouchers" => "voucher#index", :as => "vouchers"
   post "vouchers/search" => "voucher#search"
+  post "vouchers/show" => "voucher#show"
+  get "vouchers/show" => "voucher#show"
+  post "vouchers/save_report" => "voucher#save_report"
   match 'vouchers/consume/:voucher' => 'voucher#consume'
   
   resources :users

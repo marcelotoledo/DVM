@@ -11,20 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429203647) do
+ActiveRecord::Schema.define(:version => 20120501003622) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
     t.integer  "company_id"
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "value",           :precision => 8, :scale => 2
+    t.integer  "voucher_type_id"
+    t.datetime "expiration"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "genders", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "statuses", :force => true do |t|
@@ -41,6 +50,22 @@ ActiveRecord::Schema.define(:version => 20120429203647) do
     t.integer  "company_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "voucher_reports", :force => true do |t|
+    t.integer  "voucher_id"
+    t.string   "salesclerk"
+    t.integer  "gender_id"
+    t.integer  "age"
+    t.decimal  "total",      :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "voucher_types", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "vouchers", :force => true do |t|

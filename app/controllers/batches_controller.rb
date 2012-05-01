@@ -1,4 +1,5 @@
 class BatchesController < ApplicationController
+  #before_filter :logged_in?  
   require 'voucher'
   
   # GET /batches
@@ -11,6 +12,28 @@ class BatchesController < ApplicationController
       format.json { render json: @batches }
     end
   end
+
+  def download
+    require 'csv'
+
+    csv_string = CSV.generate do |csv|
+      csv << [ 'voucher', 'pin', 'value', 'type', 'expiration' ]
+      csv << [ '', '', '', '', '' ]      
+      
+      vouchers = Voucher.where("batch_id = ?", params[:id])
+      vouchers.each do |v|
+        csv << [ v.voucher, '', v.batch.value, v.batch.voucher_type.description, v.batch.expiration ]
+      end
+    end
+
+    send_data csv_string,
+    :type => 'text/csv; charset=iso-8859-1; header=present',
+    :disposition => "attachment; filename=batch-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"
+  end
+
+  def reports
+    @voucher_reports = VoucherReport.all
+  end  
 
   # GET /batches/1
   # GET /batches/1.json

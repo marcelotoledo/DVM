@@ -1,0 +1,23 @@
+= render "shared/header", :title => 'Batch Report'
+
+.row
+  .offset1.span12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= "Voucher"
+          %th= "Vendedor"
+          %th= "Total"
+          %th= "Idade"
+          %th= "Sexo"
+          %th= "Data"
+      %tbody
+        - @voucher_reports.each do |vr|
+          %tr
+            %td= Voucher.find(vr.voucher_id).voucher
+            %td= vr.salesclerk
+            %td= vr.total
+            %td= vr.age
+            %td= Gender.find_by_id(vr.gender_id).description
+            %td= vr.created_at
+    = link_to 'back', batches_path, :class => 'btn btn'
