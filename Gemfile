@@ -25,6 +25,10 @@ group :assets do
   gem 'therubyracer'
 end
 
+group :production do
+  gem 'thin'
+end
+
 gem 'jquery-rails'
 
 gem "bcrypt-ruby", :require => "bcrypt"
