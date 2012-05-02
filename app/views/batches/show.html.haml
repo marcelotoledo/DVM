@@ -1,37 +1,37 @@
-= render "shared/header", :title => 'Batch'
+= render "shared/header", :title => 'Lote'
 
 - model_class = @batch.class
 
 .row
   .offset1.span12
     %p
-      %strong= model_class.human_attribute_name(:name) + ':'
+      %strong Nome:
       = @batch.name
     %p
-      %strong= model_class.human_attribute_name(:company_id) + ':'
+      %strong Empresa:
       = Company.find_by_id(@batch.company_id).name
     %p
-      %strong= model_class.human_attribute_name(:voucher_type_id) + ':'
+      %strong Tipo do Voucher: 
       = VoucherType.find_by_id(@batch.voucher_type_id).description
     %p
-      %strong= model_class.human_attribute_name(:quantity) + ':'
+      %strong Quantidade: 
       = @batch.quantity
     %p
-      %strong= model_class.human_attribute_name(:value) + ':'
-      = @batch.value
+      %strong Valor: 
+      = number_to_currency(@batch.value, :unit => "R$")
     %p
-      %strong= model_class.human_attribute_name(:expiration) + ':'
+      %strong Data de expiração: 
       = @batch.expiration
     %p
-      %strong= model_class.human_attribute_name(:created_at) + ':'
+      %strong Data:
       = @batch.created_at
     %p
-      = link_to 'Download CSV', batches_path + '/download/' + @batch.id.to_s
+      = link_to 'Download do CSV', batches_path + '/download/' + @batch.id.to_s
 
     %table.table.table-striped
       %thead
         %tr
-          %th= "Id"
+          %th= "Número"
           %th= "Voucher"
           %th= "Status"
       %tbody
@@ -41,6 +41,6 @@
           %tr
             %td= i += 1
             %td= v.voucher
-            %td= Status.find_by_id(v.status_id).description
+            %td= v.status.description #Status.find_by_id(v.status_id).description
           
-    = link_to t('.back', :default => t("helpers.links.back")), batches_path, :class => 'btn'
+    = link_to "Voltar", batches_path, :class => 'btn'

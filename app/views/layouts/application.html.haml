@@ -13,17 +13,18 @@
       = link_to 'DVM', '/', :class => 'brand'
       .nav-collapse
         %ul.nav
-          %li{ :class => params[:controller] == 'companies' ? 'active' : '' }= link_to 'Companies', companies_path
-          %li{ :class => params[:controller] == 'users' ? 'active' : '' }= link_to 'Users', users_path
-          %li{ :class => params[:controller] == 'batches' ? 'active' : '' }= link_to 'Batches', batches_path
+          - if User.find(session[:user_id]).company_id == 1
+            %li{ :class => params[:controller] == 'companies' ? 'active' : '' }= link_to 'Empresas', companies_path
+            %li{ :class => params[:controller] == 'users' ? 'active' : '' }= link_to 'Usuários', users_path
+            %li{ :class => params[:controller] == 'batches' ? 'active' : '' }= link_to 'Lotes', batches_path
           %li{ :class => params[:controller] == 'voucher' ? 'active' : '' }= link_to 'Vouchers', vouchers_path
-          %li{ :class => params[:controller] == 'reports' ? 'active' : '' }= link_to 'Reports', '/'
+          -#%li{ :class => params[:controller] == 'reports' ? 'active' : '' }= link_to 'Reports', '/'
         %ul.nav.pull-right
           %li.dropdown
             %a{:href => '#', :class => 'dropdown-toggle', "data-toggle" => 'dropdown' }
               %i.icon-user
               %b.caret
             %ul.dropdown-menu
-              %li= link_to "Logout", '/log_out'
+              %li= link_to "Deslogar", '/log_out'
 
 = yield

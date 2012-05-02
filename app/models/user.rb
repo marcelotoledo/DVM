@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   validates_confirmation_of :password
-  validates_presence_of :name, :email, :password, :company_id
+  validates_presence_of :name, :email, :company_id
   validates :password, :length => { :in => 6..12 }, :on => :create
   validates_uniqueness_of :email
   

@@ -1,10 +1,13 @@
 Dvm::Application.routes.draw do
+  get "denied/index"
+  get "denied"   => "denied#index", :as => "denied"
+
   get "voucher/index"
 
   get "error/error"
 
-  match 'batches/download/:id' => 'batches#download'  
-  get "batches/reports" => "batches#reports"
+  match 'batches/download/:id' => 'batches#download'
+  match 'batches/reports/:id' => 'batches#reports'  
   resources :batches
 
   resources :companies

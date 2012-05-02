@@ -1,4 +1,4 @@
-= render "shared/header", :title => 'Users'
+= render "shared/header", :title => 'Usuários'
 
 - model_class = User.new.class
 
@@ -7,10 +7,10 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= "Name"
+          %th= "Nome"
           %th= "Email"
-          %th= "Company"
-          %th= "Actions"
+          %th= "Empresa"
+          %th= "Ações"
       %tbody
         - @users.each do |user|
           %tr
@@ -18,6 +18,6 @@
             %td= user.email
             %td= Company.find_by_id(user.company_id).name
             %td
-              = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-mini'
-              = link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
-    = link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'
+              = link_to "Editar", edit_user_path(user), :class => 'btn btn-mini'
+              = link_to "Remover", user_path(user), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Tem certeza?')), :class => 'btn btn-mini btn-danger'
+    = link_to "Novo", new_user_path, :class => 'btn btn-primary'

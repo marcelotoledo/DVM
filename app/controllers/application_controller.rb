@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -7,13 +9,21 @@ class ApplicationController < ActionController::Base
   
   def logged_in?
     unless session[:user_id]
-      flash.alert = "You need to log in first"
+      flash.alert = "Você precisa estar logado"
       redirect_to root_path
       return false
     else
       return true
     end
-  end    
+  end
+
+  def has_permission_to_be_here?
+    company_id = User.find(session[:user_id]).company_id
+    
+    if company_id != 1
+      redirect_to '/denied'
+    end    
+  end
 
   private
   

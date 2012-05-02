@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 class UsersController < ApplicationController
-  #before_filter :logged_in?
+  before_filter :logged_in?
+  before_filter :has_permission_to_be_here?
   
   # GET /users
   # GET /users.json
@@ -35,7 +38,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: 'User was successfully created.' }
+        format.html { redirect_to users_url, notice: 'Usuário foi criado com sucesso.' }
         format.json { render json: users_url, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -51,7 +54,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
+        format.html { redirect_to users_url, notice: 'Usuário foi atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

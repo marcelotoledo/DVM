@@ -1,4 +1,4 @@
-= render "shared/header", :title => 'Batch Report'
+= render "shared/header", :title => 'Relatório do Lote'
 
 .row
   .offset1.span12
@@ -14,10 +14,10 @@
       %tbody
         - @voucher_reports.each do |vr|
           %tr
-            %td= Voucher.find(vr.voucher_id).voucher
-            %td= vr.salesclerk
-            %td= vr.total
-            %td= vr.age
-            %td= Gender.find_by_id(vr.gender_id).description
-            %td= vr.created_at
+            %td= vr.voucher
+            %td= vr.voucher_report.salesclerk
+            %td= number_to_currency(vr.voucher_report.total, :unit => "R$")
+            %td= vr.voucher_report.age
+            %td= vr.voucher_report.gender.description
+            %td= vr.voucher_report.created_at
     = link_to 'back', batches_path, :class => 'btn btn'

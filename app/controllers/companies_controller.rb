@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
-  #before_filter :logged_in?
+  before_filter :logged_in?
+  before_filter :has_permission_to_be_here?  
   
   # GET /companies
   # GET /companies.json
@@ -35,7 +36,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to companies_path, notice: 'Company was successfully created.' }
+        format.html { redirect_to companies_path, notice: 'Empresa criada com sucesso.' }
         format.json { render json: @company, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -51,7 +52,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.update_attributes(params[:company])
-        format.html { redirect_to companies_path, notice: 'Company was successfully updated.' }
+        format.html { redirect_to companies_path, notice: 'Empresa atualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

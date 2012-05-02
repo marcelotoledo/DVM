@@ -1,35 +1,36 @@
 = form_for @batch, :html => { :class => 'form-horizontal' } do |f|
   - if @batch.errors.any?
     .alert.alert-error
-      %h2 Form is invalid
+      %h2 Dados incorretos
       %ul
         - for message in @batch.errors.full_messages
           %li= message
   .control-group
-    = f.label :name, :class => 'control-label'
+    = f.label "Nome", :class => 'control-label'
     .controls
       = f.text_field :name, :class => 'text_field'
   .control-group
-    = f.label :company_id, :class => 'control-label'
+    = f.label "Empresa", :class => 'control-label'
     .controls
-      = collection_select(:batch, :company_id, Company.all, :id, :name, :prompt => true)
+      = collection_select(:batch, :company_id, Company.all, :id, :name, :prompt => "Selecione uma opção")
   .control-group
-    = f.label :voucher_type_id, :class => 'control-label'
+    = f.label "Tipo de voucher", :class => 'control-label'
     .controls
-      = collection_select(:batch, :voucher_type_id, VoucherType.all, :id, :description, :prompt => true)
+      = collection_select(:batch, :voucher_type_id, VoucherType.all, :id, :description, :prompt => "Selecione uma opção")
   .control-group
-    = f.label :quantity, :class => 'control-label'
+    = f.label "Quantidade", :class => 'control-label'
     .controls
       = f.number_field :quantity, :class => 'number_field span1'
   .control-group
-    = f.label :value, :class => 'control-label'
+    = f.label "Valor", :class => 'control-label'
     .controls
       = f.text_field :value, :class => 'number_field span1'
       %span.help-inline Ex: 100.00
   .control-group
-    = f.label "Expiration date", :class => 'control-label'
+    = f.label "Data de expiração", :class => 'control-label'
     .controls
       = f.number_field :expiration, :class => 'number_field span2'
+      %span.help-inline Ex: 2012-12-31
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), batches_path, :class => 'btn'
+    = f.submit "Criar Lote", :class => 'btn btn-primary'
+    = link_to "Cancelar", batches_path, :class => 'btn'

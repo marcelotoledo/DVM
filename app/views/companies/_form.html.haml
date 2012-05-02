@@ -1,14 +1,17 @@
 = form_for @company, :html => { :class => 'form-horizontal' } do |f|
   - if @company.errors.any?
     .alert.alert-error
-      %h2 Form is invalid
+      %h2 Dados incorretos
       %ul
         - for message in @company.errors.full_messages
           %li= message
   .control-group
-    = f.label :name, :class => 'control-label'
+    = f.label "Nome", :class => 'control-label'
     .controls
       = f.text_field :name, :class => 'text_field'
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), companies_path, :class => 'btn'
+    - if params[:action] == 'edit'
+      = f.submit "Salvar Empresa", :class => 'btn btn-primary'
+    - else
+      = f.submit "Criar Empresa", :class => 'btn btn-primary'
+    = link_to "Cancelar", companies_path, :class => 'btn'

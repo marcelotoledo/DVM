@@ -1,5 +1,6 @@
 class BatchesController < ApplicationController
-  #before_filter :logged_in?  
+  before_filter :logged_in?
+  before_filter :has_permission_to_be_here?  
   require 'voucher'
   
   # GET /batches
@@ -32,7 +33,7 @@ class BatchesController < ApplicationController
   end
 
   def reports
-    @voucher_reports = VoucherReport.all
+    @voucher_reports = Voucher.joins(:voucher_report).where("vouchers.batch_id = ?", params[:id])
   end  
 
   # GET /batches/1
@@ -69,7 +70,7 @@ class BatchesController < ApplicationController
 
     respond_to do |format|
       if @batch.save
-        format.html { redirect_to @batch, notice: 'Batch was successfully created.' }
+        format.html { redirect_to @batch, notice: 'Lote criado com sucesso.' }
         format.json { render json: @batch, status: :created, location: @batch }
       else
         format.html { render action: "new" }

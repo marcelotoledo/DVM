@@ -7,7 +7,7 @@
     = form_for @voucher_report, :url => '/vouchers/save_report', :html => { :class => 'form-horizontal' } do |f|
       - if @voucher_report_submitted && @voucher_report_submitted.errors.any?
         .alert.alert-error
-          %h2 Form is invalid
+          %h2 Dados inválidos
           %ul
             - for message in @voucher_report_submitted.errors.full_messages
               %li= message
@@ -21,23 +21,23 @@
       .control-group
         = f.label "Valor do Voucher", :class => 'control-label'
         .controls
-          %b= @voucher[0].batch.value
+          %b= number_to_currency(@voucher[0].batch.value, :unit => "R$")
       .control-group
-        = f.label :salesclerk, :class => 'control-label'
+        = f.label "Nome do vendedor", :class => 'control-label'
         .controls
           = f.text_field :salesclerk, :class => 'text_field'
       .control-group
-        = f.label :total, :class => 'control-label'
+        = f.label "Total da compra", :class => 'control-label'
         .controls
           = f.text_field :total, :class => 'text_field span1'
       .control-group
-        = f.label :gender_id, :class => 'control-label'
+        = f.label "Sexo", :class => 'control-label'
         .controls
-          = collection_select(:voucher_report, :gender_id, Gender.all, :id, :description, :prompt => true)
+          = collection_select(:voucher_report, :gender_id, Gender.all, :id, :description, :prompt => "Selecione uma opção")
       .control-group
-        = f.label :age, :class => 'control-label'
+        = f.label "Idade", :class => 'control-label'
         .controls
           = f.text_field :age, :class => 'text_field span1'
       .form-actions
-        = f.submit 'Mark Voucher as Used', :confirm => 'Are you sure?', :class => 'btn btn-primary'
-        = link_to t('.cancel', :default => t("helpers.links.cancel")), batches_path, :class => 'btn'
+        = f.submit 'Marcar Voucher como Utilizado', :confirm => 'Tem certeza?', :class => 'btn btn-primary'
+        = link_to "Cancelar", vouchers_path, :class => 'btn'

@@ -1,38 +1,18 @@
+# -*- coding: utf-8 -*-
 class VoucherController < ApplicationController
-  #before_filter :logged_in?
+  before_filter :logged_in?
   
   def index
   end
 
-  def searchold
-    if params[:search_query] && params[:search_query].length == 8
-      voucher = Voucher.where("voucher = ? AND status_id = 1", params[:search_query]).exists?
-      
-      if voucher
-        @voucher_report = VoucherReport.new
-        @voucher = Voucher.joins(:batch).where("vouchers.voucher = ?", params[:search_query]).limit(1)
-        render 'show'
-        return
-      else
-        @voucher_found = false
-      end
-    else
-      @voucher_found = false
-    end
-
-    if !@voucher_found
-      redirect_to vouchers_path, alert: 'Voucher Not Found'
-    end
-  end
-
   def search
-    voucher = Voucher.where("voucher = ? AND status_id = 1", params[:search_query]).exists?
+    voucher = Voucher.joins(:batch).where("vouchers.voucher = ? AND vouchers.status_id = 1 AND batches.expiration > ? AND batches.company_id = ?", params[:search_query], Time.now, User.find(session[:user_id]).company_id).exists?
     
     if voucher
       show
       #format.html { render :action => '/show' and return }
     else
-      redirect_to vouchers_path, alert: 'Voucher Not Found'
+      redirect_to vouchers_path, alert: 'Voucher não encontrado'
     end
   end
   
@@ -61,7 +41,7 @@ class VoucherController < ApplicationController
       if @voucher
         format.html { render 'show' }
       else
-        format.html { redirect_to vouchers_path, alert: 'Voucher Not Found to Show' }
+        format.html { redirect_to vouchers_path, alert: 'Voucher não encontrado' }
       end
     end
   end  

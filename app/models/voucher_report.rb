@@ -1,6 +1,6 @@
 class VoucherReport < ActiveRecord::Base
-  has_one :gender
-  belongs_to :vouchers
+  belongs_to :gender
+  belongs_to :voucher
 
   validates_presence_of :salesclerk, :total, :gender_id, :age
   validates :total, :numericality => true

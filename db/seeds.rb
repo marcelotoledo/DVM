@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Status.create([{ description: 'Generated' }, { description: 'Used' }])
+Status.create([{ description: 'Novo' }, { description: 'Usado' }])
 VoucherType.create([{ description: 'Free' }, { description: 'Paid' }, { description: 'Free + Paid' }])
-Gender.create([{ description: 'Male' }, { description: 'Female' }])
+Gender.create([{ description: 'Masculino' }, { description: 'Feminino' }])
+Company.create([{ name: 'DropGifts' }])
+User.create(:name => 'root - delete me' , :email => 'root@root.com', :password => 'rootroot', :password_confirmation => 'rootroot', :company_id => 1)
