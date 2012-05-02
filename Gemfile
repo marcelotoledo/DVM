@@ -21,13 +21,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   
   gem 'twitter-bootstrap-rails'
-  gem "haml-rails"
   gem 'therubyracer'
 end
 
 group :production do
   gem 'thin'
 end
+
+gem "haml-rails"
 
 gem 'jquery-rails'
 
