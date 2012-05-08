@@ -24,6 +24,10 @@ en:
         total: Total
         gender_id: Sexo
         age: Idade
+      campaign:
+        name: Campanha
+        company_id: Empresa
+        is_active: Ativa?
     errors:
       messages:
         accepted: deve ser aceito

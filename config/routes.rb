@@ -1,4 +1,6 @@
 Dvm::Application.routes.draw do
+  resources :campaigns
+
   get "denied/index"
   get "denied"   => "denied#index", :as => "denied"
 

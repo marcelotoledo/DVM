@@ -1,3 +1,5 @@
 * Paginacao
 * CSV downloads everywhere
 * Melhorar performance das queries no voucher -> show
+* Erro no view/layout/application
+* O visited está com texto cinza e fica ruim com os botões

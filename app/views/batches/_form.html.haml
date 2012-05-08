@@ -10,6 +10,10 @@
     .controls
       = f.text_field :name, :class => 'text_field'
   .control-group
+    = f.label "Campanha", :class => 'control-label'
+    .controls
+      = collection_select(:batch, :campaign_id, Campaign.all, :id, :name, :prompt => "Selecione uma opção")
+  .control-group
     = f.label "Empresa", :class => 'control-label'
     .controls
       = collection_select(:batch, :company_id, Company.all, :id, :name, :prompt => "Selecione uma opção")

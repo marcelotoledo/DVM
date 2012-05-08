@@ -11,17 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501003622) do
+ActiveRecord::Schema.define(:version => 20120503110506) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
-    t.integer  "company_id"
+    t.integer  "campaign_id"
     t.integer  "quantity"
     t.decimal  "value",           :precision => 8, :scale => 2
     t.integer  "voucher_type_id"
     t.datetime "expiration"
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
+  end
+
+  create_table "campaigns", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.boolean  "is_active"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "companies", :force => true do |t|
