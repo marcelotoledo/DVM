@@ -1,4 +1,4 @@
-= render "shared/header", :title => 'Lotes'
+= render "shared/header", :title => 'Lotes > ' + Campaign.find_by_id(params[:id]).name
 
 - model_class = Batch.new.class
 
@@ -8,7 +8,6 @@
       %thead
         %tr
           %th= "Nome"
-          %th= "Campanha"
           %th= "Quantidade"
           %th= "Data"
           %th= "Ações"
@@ -16,11 +15,11 @@
         - @batches.each do |batch|
           %tr
             %td= link_to batch.name, batch_path(batch)
-            %td= Campaign.find_by_id(batch.campaign_id).name
             %td= batch.quantity
             %td= batch.created_at
             %td
               = link_to 'Relatórios', batches_path + '/reports/' + batch.id.to_s, :class => 'btn btn-mini'
               = link_to "Remover", batch_path(batch), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Tem certeza?')), :class => 'btn btn-mini btn-danger'
 
-    = link_to "Novo", new_batch_path, :class => 'btn btn-primary'
+    = link_to 'Voltar', campaigns_path, :class => 'btn btn'
+    = link_to "Novo", '/batches/campaign/' + params[:id] + '/new', :class => 'btn btn-primary'

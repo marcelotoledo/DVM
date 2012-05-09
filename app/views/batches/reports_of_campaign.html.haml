@@ -1,4 +1,4 @@
-= render "shared/header", :title => 'Relatório do Lote'
+= render "shared/header", :title => 'Relatórios > ' + Campaign.find_by_id(params[:id]).name
 
 .row
   .offset1.span12
@@ -6,6 +6,7 @@
       %thead
         %tr
           %th= "Voucher"
+          %th= "Usuário"
           %th= "Vendedor"
           %th= "Total"
           %th= "Idade"
@@ -15,9 +16,10 @@
         - @voucher_reports.each do |vr|
           %tr
             %td= vr.voucher
+            %td= vr.voucher_report.user.name
             %td= vr.voucher_report.salesclerk
             %td= number_to_currency(vr.voucher_report.total, :unit => "R$")
             %td= vr.voucher_report.age
             %td= vr.voucher_report.gender.description
             %td= vr.voucher_report.created_at
-    = link_to 'back', batches_path + '/campaign/' + @campaign_id.to_s, :class => 'btn btn'
+    = link_to 'Voltar', campaigns_path, :class => 'btn btn'

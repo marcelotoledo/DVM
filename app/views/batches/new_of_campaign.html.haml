@@ -1,0 +1,40 @@
+= render "shared/header", :title => "Novo Lote de Vouchers > " + Campaign.find_by_id(params[:id]).name
+
+- model_class = @batch.class
+
+.row
+  .offset1.span12
+    = form_for @batch, :html => { :class => 'form-horizontal' } do |f|
+      - if @batch.errors.any?
+        .alert.alert-error
+          %h2 Dados incorretos
+          %ul
+            - for message in @batch.errors.full_messages
+              %li= message
+      .control-group
+        = f.label "Nome", :class => 'control-label'
+        .controls
+          = f.text_field :name, :class => 'text_field'
+      .control-group
+        = f.label "Tipo de voucher", :class => 'control-label'
+        .controls
+          = collection_select(:batch, :voucher_type_id, VoucherType.all, :id, :description, :prompt => "Selecione uma opção")
+      .control-group
+        = f.label "Quantidade", :class => 'control-label'
+        .controls
+          = f.number_field :quantity, :class => 'number_field span1'
+      .control-group
+        = f.label "Valor", :class => 'control-label'
+        .controls
+          = f.text_field :value, :class => 'number_field span1'
+          %span.help-inline Ex: 100.00
+      .control-group
+        = f.label "Data de expiração", :class => 'control-label'
+        .controls
+          = f.number_field :expiration, :class => 'number_field span2'
+          %span.help-inline Ex: 2012-12-31
+      .form-actions
+        = f.hidden_field :campaign_id, :value => params[:id]
+        = f.submit "Criar Lote", :class => 'btn btn-primary'
+        = link_to "Cancelar", batches_path + '/campaign/' + params[:id].to_s, :class => 'btn'
+

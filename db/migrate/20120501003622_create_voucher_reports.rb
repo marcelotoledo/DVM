@@ -6,6 +6,7 @@ class CreateVoucherReports < ActiveRecord::Migration
       t.integer :gender_id
       t.integer :age
       t.decimal :total, :precision => 8, :scale => 2
+      t.integer :user_id
 
       t.timestamps
     end

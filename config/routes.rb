@@ -8,8 +8,11 @@ Dvm::Application.routes.draw do
 
   get "error/error"
 
+  match 'batches/campaign/:id/reports' => 'batches#reports_of_campaign'
+  match 'batches/campaign/:id/new' => 'batches#new_of_campaign'
+  match 'batches/campaign/:id' => 'batches#of_campaign'
   match 'batches/download/:id' => 'batches#download'
-  match 'batches/reports/:id' => 'batches#reports'  
+  match 'batches/reports/:id' => 'batches#reports'
   resources :batches
 
   resources :companies

@@ -2,9 +2,29 @@ class BatchesController < ApplicationController
   before_filter :logged_in?
   before_filter :has_permission_to_be_here?  
   require 'voucher'
+
+  def reports_of_campaign
+    @voucher_reports = Voucher.joins(:batch, :voucher_report => :user).where("batches.campaign_id = ?", params[:id])
+  end
+
+  def new_of_campaign
+    @batch = Batch.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @batch }
+    end
+  end  
+
+  def of_campaign
+    @batches = Batch.where("campaign_id = ?", params[:id])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @batches }
+    end
+  end  
   
-  # GET /batches
-  # GET /batches.json
   def index
     @batches = Batch.all
 
@@ -34,6 +54,7 @@ class BatchesController < ApplicationController
 
   def reports
     @voucher_reports = Voucher.joins(:voucher_report).where("vouchers.batch_id = ?", params[:id])
+    @campaign_id = Batch.where("id = ?", params[:id]).first.campaign_id
   end  
 
   # GET /batches/1

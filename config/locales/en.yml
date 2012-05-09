@@ -14,7 +14,7 @@ en:
         company_id: Empresa
       batch:
         name: Nome
-        company_id: Empresa
+        campaign_id: Campanha
         quantity: Quantidade
         value: Valor
         voucher_type_id: Tipo de voucher

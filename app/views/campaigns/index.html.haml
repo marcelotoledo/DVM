@@ -20,6 +20,8 @@
             %td= campaign.is_active ? "Sim" : "Não"
             %td= campaign.created_at
             %td
+              = link_to "Lotes", '/batches/campaign/' + campaign.id.to_s, :class => 'btn btn-mini'
+              = link_to "Relatórios", '/batches/campaign/' + campaign.id.to_s + '/reports', :class => 'btn btn-mini'
               = link_to "Editar", edit_campaign_path(campaign), :class => 'btn btn-mini'
               = link_to "Remover", campaign_path(campaign), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Tem certeza?')), :class => 'btn btn-mini btn-danger'
      

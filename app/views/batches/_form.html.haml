@@ -14,10 +14,6 @@
     .controls
       = collection_select(:batch, :campaign_id, Campaign.all, :id, :name, :prompt => "Selecione uma opção")
   .control-group
-    = f.label "Empresa", :class => 'control-label'
-    .controls
-      = collection_select(:batch, :company_id, Company.all, :id, :name, :prompt => "Selecione uma opção")
-  .control-group
     = f.label "Tipo de voucher", :class => 'control-label'
     .controls
       = collection_select(:batch, :voucher_type_id, VoucherType.all, :id, :description, :prompt => "Selecione uma opção")

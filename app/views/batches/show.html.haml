@@ -8,8 +8,8 @@
       %strong Nome:
       = @batch.name
     %p
-      %strong Empresa:
-      = Company.find_by_id(@batch.company_id).name
+      %strong Campanha:
+      = Campaign.find_by_id(@batch.campaign_id).name
     %p
       %strong Tipo do Voucher: 
       = VoucherType.find_by_id(@batch.voucher_type_id).description
@@ -43,4 +43,4 @@
             %td= v.voucher
             %td= v.status.description #Status.find_by_id(v.status_id).description
           
-    = link_to "Voltar", batches_path, :class => 'btn'
+    = link_to "Voltar", batches_path + '/campaign/' + @batch.campaign_id.to_s, :class => 'btn'

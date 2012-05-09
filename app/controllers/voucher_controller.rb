@@ -6,13 +6,13 @@ class VoucherController < ApplicationController
   end
 
   def search
-    voucher = Voucher.joins(:batch).where("vouchers.voucher = ? AND vouchers.status_id = 1 AND batches.expiration > ? AND batches.company_id = ?", params[:search_query], Time.now, User.find(session[:user_id]).company_id).exists?
+    voucher = Voucher.joins(:batch => :campaign).where("vouchers.voucher = ? AND vouchers.status_id = 1 AND batches.expiration > ? AND campaigns.company_id = ?", params[:search_query], Time.now, User.find(session[:user_id]).company_id).exists?
     
     if voucher
       show
       #format.html { render :action => '/show' and return }
     else
-      redirect_to vouchers_path, alert: 'Voucher não encontrado'
+      redirect_to vouchers_path, alert: 'Voucher indisponível'
     end
   end
   
@@ -44,5 +44,5 @@ class VoucherController < ApplicationController
         format.html { redirect_to vouchers_path, alert: 'Voucher não encontrado' }
       end
     end
-  end  
+  end
 end

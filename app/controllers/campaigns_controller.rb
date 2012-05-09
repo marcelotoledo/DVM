@@ -1,6 +1,15 @@
 class CampaignsController < ApplicationController
   before_filter :logged_in?
   before_filter :has_permission_to_be_here?
+
+  def batches
+    @batches = Batch.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @batches }
+    end    
+  end
   
   def index
     @campaigns = Campaign.all

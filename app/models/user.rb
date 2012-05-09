@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :company
+  has_many :voucher_reports
   attr_accessible :name, :email, :password, :password_confirmation, :company_id
   
   attr_accessor :password
