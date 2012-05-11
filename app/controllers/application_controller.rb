@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     
     if company_id != 1
       redirect_to '/denied'
-    end    
+    end
   end
 
   private
