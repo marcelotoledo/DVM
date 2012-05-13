@@ -16,7 +16,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   
-  gem 'therubyracer'
+  gem 'therubyracer'  
 end
 
 gem 'twitter-bootstrap-rails'
@@ -37,6 +37,8 @@ gem 'jquery-rails'
 gem "bcrypt-ruby", :require => "bcrypt"
 
 gem 'rails-footnotes', '>= 3.7.5.rc4', :group => :development
+
+gem 'kaminari'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

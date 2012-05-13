@@ -3,6 +3,14 @@
 - model_class = User.new.class
 
 .row
+  .span12.offset1
+    %h3 Filtros
+    = form_for :filter, :url => users_path + '/filter', :html => { :class => "well form-inline" } do |f|
+      %label Empresa
+      = collection_select(:filter, :company_id, Company.where("deleted = false"), :id, :name, :prompt => "Selecione uma opção")
+      = f.submit "Filtrar", :class => 'btn btn-primary'
+
+.row
   .offset1.span12
     %table.table.table-striped
       %thead
@@ -21,3 +29,4 @@
               = link_to "Editar", edit_user_path(user), :class => 'btn btn-mini'
               = link_to "Remover", user_path(user), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Tem certeza?')), :class => 'btn btn-mini btn-danger'
     = link_to "Novo", new_user_path, :class => 'btn btn-primary'
+    = link_to "Upload de Usuários CSV", '/users/upload', :class => 'btn btn-primary'

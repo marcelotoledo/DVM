@@ -5,6 +5,7 @@
     %table.table.table-striped
       %thead
         %tr
+          %th= "Lote"
           %th= "Voucher"
           %th= "Usuário"
           %th= "Vendedor"
@@ -15,6 +16,7 @@
       %tbody
         - @voucher_reports.each do |vr|
           %tr
+            %td= vr.batch.name
             %td= vr.voucher
             %td= vr.voucher_report.user.name
             %td= vr.voucher_report.salesclerk
@@ -23,3 +25,4 @@
             %td= vr.voucher_report.gender.description
             %td= vr.voucher_report.created_at
     = link_to 'Voltar', campaigns_path, :class => 'btn btn'
+    = link_to 'Download do Relatório em CSV', "/batches/campaign/" + params[:id] + "/download_report", :class => 'btn btn-primary'

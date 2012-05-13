@@ -8,6 +8,7 @@ Dvm::Application.routes.draw do
 
   get "error/error"
 
+  match 'batches/campaign/:id/download_report' => 'batches#download_report'  
   match 'batches/campaign/:id/reports' => 'batches#reports_of_campaign'
   match 'batches/campaign/:id/new' => 'batches#new_of_campaign'
   match 'batches/campaign/:id' => 'batches#of_campaign'
@@ -28,7 +29,10 @@ Dvm::Application.routes.draw do
   get "vouchers/show" => "voucher#show"
   post "vouchers/save_report" => "voucher#save_report"
   match 'vouchers/consume/:voucher' => 'voucher#consume'
-  
+
+  post "users/filter" => "users#index"
+  get "users/upload" => "users#upload_index"
+  post "users/upload" => "users#upload"
   resources :users
   resources :sessions
 

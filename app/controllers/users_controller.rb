@@ -3,11 +3,41 @@
 class UsersController < ApplicationController
   before_filter :logged_in?
   before_filter :has_permission_to_be_here?
+
+  def upload_index
+    @errors = []
+    @success = []
+    render 'upload'
+  end  
   
-  # GET /users
-  # GET /users.json
+  def upload
+    require 'csv'
+    
+    csv_text = File.read(params[:upload][:csv].tempfile)
+    csv = CSV.parse(csv_text, :col_sep => ';')
+    @errors = []
+    @success = []
+    csv.each do |row|
+      company = Company.find_or_create_by_name(row[3])
+      new_user = User.new(:name => row[0], :email => row[1], :password => row[2], :company_id => company.id)
+      logger.debug("Nome: #{row[0]}")
+      logger.debug("Email: #{row[1]}")
+      logger.debug("Senha: #{row[2]}")
+      logger.debug("Empresa: #{row[3]}")
+      if !new_user.save
+        @errors << new_user.dup
+      else
+        @success << row[1]
+      end
+    end
+  end
+  
   def index
-    @users = User.all
+    if params[:filter]
+      @users = User.where("deleted = FALSE and company_id = ?", params[:filter][:company_id])
+    else
+      @users = User.where("deleted = FALSE")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +45,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
 
@@ -26,13 +54,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(params[:user])
 
@@ -47,8 +72,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 
@@ -63,15 +86,18 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.deleted = true
 
     respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+      if @user.save
+        format.html { redirect_to users_url, notice: 'Usuário removido com sucesso.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

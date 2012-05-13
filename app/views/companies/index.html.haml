@@ -16,6 +16,7 @@
             %td
               = link_to "Editar", edit_company_path(company), :class => 'btn btn-mini'
               = link_to "Remover", company_path(company), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Tem certeza?')), :class => 'btn btn-mini btn-danger'
+    = paginate @companies
 
     = link_to "Nova", new_company_path, :class => 'btn btn-primary'
  

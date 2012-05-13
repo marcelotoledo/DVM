@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_hash
       t.string :password_salt
       t.integer :company_id
+      t.boolean :deleted, :default => false      
 
       t.timestamps
     end

@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(:version => 20120503110506) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "deleted",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "genders", :force => true do |t|
@@ -56,8 +57,9 @@ ActiveRecord::Schema.define(:version => 20120503110506) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.integer  "company_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.boolean  "deleted",       :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "voucher_reports", :force => true do |t|

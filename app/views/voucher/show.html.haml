@@ -40,5 +40,5 @@
           = f.text_field :age, :class => 'text_field span1'
       .form-actions
         = f.hidden_field :user_id, :value => session[:user_id]
-        = f.submit 'Marcar Voucher como Utilizado', :confirm => 'Tem certeza?', :class => 'btn btn-primary'
+        = f.submit 'Marcar Voucher como Utilizado', :confirm => 'Confirma resgate do vale presente?', :class => 'btn btn-primary'
         = link_to "Cancelar", vouchers_path, :class => 'btn'

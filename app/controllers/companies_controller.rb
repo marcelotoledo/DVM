@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = Company.where("deleted = FALSE").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -65,11 +65,16 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   def destroy
     @company = Company.find(params[:id])
-    @company.destroy
-
+    @company.deleted = true
+    
     respond_to do |format|
-      format.html { redirect_to companies_url }
-      format.json { head :no_content }
+      if @company.save
+        format.html { redirect_to companies_path, notice: 'Empresa removida com sucesso.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

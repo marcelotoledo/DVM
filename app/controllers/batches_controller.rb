@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class BatchesController < ApplicationController
   before_filter :logged_in?
   before_filter :has_permission_to_be_here?  
@@ -34,12 +36,33 @@ class BatchesController < ApplicationController
     end
   end
 
+  def download_report
+    require 'csv'
+    require 'iconv'
+
+    c = Iconv.new('ISO-8859-15','UTF-8')    
+    csv_string = CSV.generate do |csv|
+      csv << [ 'lote', 'voucher', 'usuário', 'vendedor', 'total', 'idade', 'sexo', 'data' ]      
+
+      voucher_reports = Voucher.joins(:batch, :voucher_report => :user).where("batches.campaign_id = ?", params[:id])
+      voucher_reports.each do |v|
+        csv << [ v.batch.name, v.voucher, v.voucher_report.user.name, v.voucher_report.salesclerk, v.voucher_report.total, v.voucher_report.age, v.voucher_report.gender.description, v.voucher_report.created_at ]
+      end
+    end
+
+    send_data(c.iconv(csv_string),
+    :type => 'text/csv; charset=utf-8; header=present',
+    :disposition => "attachment; filename=report-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")
+  end  
+
   def download
     require 'csv'
+    require 'iconv'
 
-    csv_string = CSV.generate do |csv|
-      csv << [ 'voucher', 'pin', 'value', 'type', 'expiration' ]
-      csv << [ '', '', '', '', '' ]      
+    c = Iconv.new('ISO-8859-15','UTF-8')
+    
+    csv_string = CSV.generate(:encoding => "iso8859-1") do |csv|
+      csv << [ 'voucher', 'pin', 'valor', 'tipo', 'expiração' ]
       
       vouchers = Voucher.where("batch_id = ?", params[:id])
       vouchers.each do |v|
@@ -47,9 +70,9 @@ class BatchesController < ApplicationController
       end
     end
 
-    send_data csv_string,
-    :type => 'text/csv; charset=iso-8859-1; header=present',
-    :disposition => "attachment; filename=batch-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"
+    send_data(c.iconv(csv_string),
+    :type => 'text/csv; charset=iso8859-1; header=present',
+    :disposition => "attachment; filename=batch-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")
   end
 
   def reports

@@ -24,7 +24,7 @@
   .control-group
     = f.label "Empresa", :class => 'control-label'
     .controls
-      = collection_select(:user, :company_id, Company.all, :id, :name, :prompt => "Selecione uma opção")
+      = collection_select(:user, :company_id, Company.where("deleted = false"), :id, :name, :prompt => "Selecione uma opção")
   .form-actions
     - if params[:action] == 'edit'    
       = f.submit "Salvar Usuário", :class => 'btn btn-primary'

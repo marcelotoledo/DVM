@@ -1,3 +1,5 @@
+* Filtro por empresa nos usuários
+
 * Paginacao
 * CSV downloads everywhere
 * Melhorar performance das queries no voucher -> show

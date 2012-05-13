@@ -26,7 +26,7 @@
       %strong Data:
       = @batch.created_at
     %p
-      = link_to 'Download do CSV', batches_path + '/download/' + @batch.id.to_s
+      = link_to 'Download do CSV', batches_path + '/download/' + @batch.id.to_s, :class => 'btn btn-primary'
 
     %table.table.table-striped
       %thead
@@ -41,6 +41,12 @@
           %tr
             %td= i += 1
             %td= v.voucher
-            %td= v.status.description #Status.find_by_id(v.status_id).description
+            %td
+              - case v.status.id
+                - when 1
+                  %span.label.label-success= v.status.description
+                - when 2
+                  %span.label.label-important= v.status.description
+
           
     = link_to "Voltar", batches_path + '/campaign/' + @batch.campaign_id.to_s, :class => 'btn'

@@ -1,0 +1,21 @@
+= render "shared/header", :title => 'Upload de Usuários'
+
+- model_class = User.new.class
+
+.row
+  .offset1.span12
+    - if !@success.empty?
+      .alert.alert-success
+        %h2= @success.length.to_s + " inserido(s) com sucesso."
+    - if !@errors.empty?
+      .alert.alert-error
+        %h2= @errors.length.to_s + " registros com erro:"
+        %ul
+          - @errors.each do |error| 
+            - for message in error.errors.full_messages
+              %li= error.name + " -> " + message            
+    = form_for :upload, :url => '/users/upload', :html => { :multipart => true } do |f|
+      = f.file_field :csv
+      %p.help-block O formato deve ser: nome do usuários;email;senha;nome da empresa
+      = f.submit "Upload de Usuários CSV ", :disable_with => 'Enviando...', :class => 'btn btn-primary'
+    = link_to "Voltar", users_path, :class => 'btn'

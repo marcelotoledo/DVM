@@ -1,6 +1,6 @@
 class Batch < ActiveRecord::Base
   has_many :vouchers, :dependent => :destroy
-  has_many :voucher_reports, :through => :vouchers
+  has_many :voucher_reports, :through => :vouchers, :dependent => :destroy
   belongs_to :voucher_type
   belongs_to :campaign
   
