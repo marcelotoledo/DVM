@@ -20,10 +20,6 @@ class UsersController < ApplicationController
     csv.each do |row|
       company = Company.find_or_create_by_name(row[3])
       new_user = User.new(:name => row[0], :email => row[1], :password => row[2], :company_id => company.id)
-      logger.debug("Nome: #{row[0]}")
-      logger.debug("Email: #{row[1]}")
-      logger.debug("Senha: #{row[2]}")
-      logger.debug("Empresa: #{row[3]}")
       if !new_user.save
         @errors << new_user.dup
       else

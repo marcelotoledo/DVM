@@ -65,8 +65,14 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   def destroy
     @company = Company.find(params[:id])
-    @company.deleted = true
-    
+
+    # @company.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to companies_url }
+    #   format.json { head :no_content }
+    # end
+
+    @company.deleted = true    
     respond_to do |format|
       if @company.save
         format.html { redirect_to companies_path, notice: 'Empresa removida com sucesso.' }
